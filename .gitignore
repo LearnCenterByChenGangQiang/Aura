@@ -4,10 +4,9 @@ DerivedDataCache/
 Intermediate/
 Saved/
 Build/
-DerivedDataCache/
+
 
 # 开发IDE生成的目录或文件
-.idea
 .vscode
 .vs
 *.VC.db
@@ -15,5 +14,10 @@ DerivedDataCache/
 *.opendb
 *.sdf
 *.suo
+*.sln
+*.xcodeproj
+*.xcworkspace
+
+.idea
 
 
