@@ -18,8 +18,9 @@ class AURA_API AAuraCharacterBase : public ACharacter, public IAbilitySystemInte
 public:
 	AAuraCharacterBase();
 
-	// IAbilitySystemInterface
+	//~ Begin Ability System Interface
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+	//~ End Ability System Interface
 
 	UAttributeSet* GetAttributeSet() const { return AttributeSet;};
 
