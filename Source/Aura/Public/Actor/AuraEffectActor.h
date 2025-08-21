@@ -20,7 +20,7 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, meta = (ToolTip = "将GameplayEffect应用到目标Actor上"))
 	void ApplyEffectToTarget(AActor* TargetActor, TSubclassOf<UGameplayEffect> GameplayEffectClass);
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Applied Effects")
