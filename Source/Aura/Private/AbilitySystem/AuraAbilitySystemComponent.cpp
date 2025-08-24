@@ -12,5 +12,12 @@ void UAuraAbilitySystemComponent::AbilityActorInfoSet()
 void UAuraAbilitySystemComponent::EffectApplied(UAbilitySystemComponent* AbilitySystemComponent,
                                                 const FGameplayEffectSpec& EffectSpec, FActiveGameplayEffectHandle ActiveGameplayEffectHandle)
 {
-	Debug::Print(FString::Printf(TEXT("Effect Applied ")));
+	FGameplayTagContainer TagContainer;
+	EffectSpec.GetAllAssetTags(TagContainer);
+	for (auto& Tag : TagContainer)
+	{
+		const FString Msg = FString::Printf(TEXT("GE Tag: %s"), *Tag.ToString());
+		Debug::Print(Msg);
+	}
+	
 }
