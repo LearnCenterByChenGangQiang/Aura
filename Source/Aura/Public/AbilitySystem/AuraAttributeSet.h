@@ -64,65 +64,65 @@ public:
 	virtual void PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data) override;
 
 	/*
-	 * Primary Attributes
+	 * Primary Attributes 基础属性
 	 */
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_Strength, Category = "Primary Attributes")
-	FGameplayAttributeData Strength;
+	FGameplayAttributeData Strength; // 力量:提升物理伤害
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, Strength)
 
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_Intelligence, Category = "Primary Attributes")
-	FGameplayAttributeData Intelligence;
+	FGameplayAttributeData Intelligence;	// 智力: 提升魔法伤害
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, Intelligence)
 
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_Resilience, Category = "Primary Attributes")
-	FGameplayAttributeData Resilience;
+	FGameplayAttributeData Resilience;	// 韧性: 提升护甲和护甲穿透
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, Resilience)
 
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_Vigor, Category = "Primary Attributes")
-	FGameplayAttributeData Vigor;
+	FGameplayAttributeData Vigor;	// 活力: 提升生命值
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, Vigor)
 
 	/*
 	 * Secondary Attributes
 	 */
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_Armor, Category = "Secondary Secondary")
-	FGameplayAttributeData Armor;
+	FGameplayAttributeData Armor;	// 护甲: 降低所受伤害,提升格挡几率(关联基础属性:韧性)
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, Armor)
 
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_ArmorPenetration, Category = "Secondary Secondary")
-	FGameplayAttributeData ArmorPenetration;
+	FGameplayAttributeData ArmorPenetration;	// 护甲穿透: 无视一定比例敌方护甲,提升暴击率(关联基础属性:韧性)
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, ArmorPenetration)
 
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_BlockChance, Category = "Secondary Secondary")
-	FGameplayAttributeData BlockChance;
+	FGameplayAttributeData BlockChance;	// 格挡几率: 将incoming伤害减半的几率(关联基础属性:护甲)
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, BlockChance)
 
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_CriticalHitChance, Category = "Secondary Secondary")
-	FGameplayAttributeData CriticalHitChance;
+	FGameplayAttributeData CriticalHitChance;	// 暴击率: 造成双倍伤害半附加暴击加成的几率(关联基础属性:护甲穿透)
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, CriticalHitChance)
 
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_CriticalHitDamage, Category = "Secondary Secondary")
-	FGameplayAttributeData CriticalHitDamage;
+	FGameplayAttributeData CriticalHitDamage;	// 暴击伤害: 触发暴击时附加的额外伤害(关联基础属性:护甲穿透)
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, CriticalHitDamage)
 
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_CriticalHitResistance, Category = "Secondary Secondary")
-	FGameplayAttributeData CriticalHitResistance;
+	FGameplayAttributeData CriticalHitResistance;	// 暴击抗性: 降低敌方攻击时的暴击几率(关联基础属性:护甲)
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, CriticalHitResistance)
 
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_HealthRegeneration, Category = "Secondary Secondary")
-	FGameplayAttributeData HealthRegeneration;
+	FGameplayAttributeData HealthRegeneration;	// 生命回复: 每秒回复的生命值(关联基础属性:活力)
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, HealthRegeneration)
 
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_ManaRegeneration, Category = "Secondary Secondary")
-	FGameplayAttributeData ManaRegeneration;
+	FGameplayAttributeData ManaRegeneration;	// 法力回复: 每秒回复的法力值(关联基础属性:智力)
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, ManaRegeneration)
 
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_MaxHealth, Category = "Vital Attributes")
-	FGameplayAttributeData MaxHealth;
+	FGameplayAttributeData MaxHealth;	// 最大生命值(关联基础属性:活力)
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, MaxHealth)
 
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_MaxMana, Category = "Vital Attributes")
-	FGameplayAttributeData MaxMana;
+	FGameplayAttributeData MaxMana; // 最大法力值(关联基础属性:智力)
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, MaxMana)
 	
 	/*
