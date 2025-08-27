@@ -2,11 +2,14 @@
 
 
 #include "Player/AuraPlayerController.h"
+
+#include "AbilitySystemBlueprintLibrary.h"
 #include "EnhancedInputSubsystems.h"
 #include "Input/AuraInputComponent.h"
 #include "Interaction/EnemyInterface.h"
 
 #include "AuraDebugHelper.h"
+#include "AbilitySystem/AuraAbilitySystemComponent.h"
 
 AAuraPlayerController::AAuraPlayerController()
 {
@@ -136,15 +139,27 @@ void AAuraPlayerController::CurrsorTrace()
 
 void AAuraPlayerController::AbilityInputTagPressed(FGameplayTag InputTag)
 {
-	Debug::Print(*InputTag.ToString(), FColor::Red, 1);
+	//Debug::Print(*InputTag.ToString(), FColor::Red, 1);
 }
 
 void AAuraPlayerController::AbilityInputTagReleased(FGameplayTag InputTag)
 {
-	Debug::Print(*InputTag.ToString(), FColor::Blue, 2);
+	if (GetASC() == nullptr) return;
+	GetASC()->AbilityInputTagReleased(InputTag);
 }
 
 void AAuraPlayerController::AbilityInputTagHeld(FGameplayTag InputTag)
 {
-	Debug::Print(*InputTag.ToString(), FColor::Green, 3);
+	if (GetASC() == nullptr) return;
+	GetASC()->AbilityInputTagHeld(InputTag);
+}
+
+UAuraAbilitySystemComponent* AAuraPlayerController::GetASC()
+{
+	if (AuraAbilitySystemComponent == nullptr)
+	{
+		AuraAbilitySystemComponent = Cast<UAuraAbilitySystemComponent>(UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(GetPawn<APawn>()));
+	}
+	
+	return AuraAbilitySystemComponent;
 }
