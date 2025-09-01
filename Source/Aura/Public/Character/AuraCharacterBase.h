@@ -22,7 +22,7 @@ class AURA_API AAuraCharacterBase : public ACharacter, public IAbilitySystemInte
 public:
 	AAuraCharacterBase();
 
-	//~ Begin Ability System Interface
+	//~ Begin Ability System Interface 
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	//~ End Ability System Interface
 
@@ -67,6 +67,22 @@ protected:
 	virtual  void InitializeDefaultAttributes() const;
 
 	void AddCharacterAbilities();
+
+	/* Dissolve Effects (溶解效果)*/
+	void Dissolve();
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void StartDissolveTimeline(UMaterialInstanceDynamic* DynamicMaterialInstance);
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void StartWeaponDissolveTimeline(UMaterialInstanceDynamic* DynamicMaterialInstance);
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TObjectPtr<UMaterialInstance> DissolveMaterialInstance;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TObjectPtr<UMaterialInstance> WeaponDissolveMaterialInstance;
+	
 
 private:
 	UPROPERTY(EditAnywhere, Category="Abilities")

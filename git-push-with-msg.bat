@@ -1,8 +1,9 @@
 @echo off
 setlocal enabledelayedexpansion
-title Git Commit/Push with Message
+title Git Commit/Push with Message (循环模式)
 
 :: 检查是否在Git仓库中
+:check_repo
 echo [检查] 验证当前目录是否为Git仓库...
 git rev-parse --is-inside-work-tree >nul 2>&1 || (
     echo [错误] 当前目录不是一个 Git 仓库
@@ -23,6 +24,7 @@ if %perform_push% equ 1 (
     echo [模式] 将仅执行 Commit 操作（如需Push，请添加 -p 或 --push 参数）
 )
 
+:start_commit
 :: 输入 commit message
 echo.
 set /p msg=请输入 commit message（留空则使用默认）: 
@@ -39,8 +41,7 @@ if %errorlevel% equ 0 (
     echo [步骤1/3] 更改已成功添加到暂存区
 ) else (
     echo [错误] 添加更改时出现问题
-    pause
-    exit /b 1
+    goto end_operation
 )
 
 :: 执行提交操作
@@ -51,8 +52,7 @@ if %errorlevel% equ 0 (
     echo [步骤2/3] Commit操作已完成
 ) else (
     echo [错误] Commit操作失败
-    pause
-    exit /b 1
+    goto end_operation
 )
 
 :: 只有指定了参数时才执行push
@@ -64,11 +64,11 @@ if %perform_push% equ 1 (
         echo [步骤3/3] Push操作已完成
     ) else (
         echo [错误] Push操作失败
-        pause
-        exit /b 1
+        goto end_operation
     )
 )
 
+:end_operation
 echo.
 echo ===== 操作完成 =====
 if %perform_push% equ 1 (
@@ -77,4 +77,10 @@ if %perform_push% equ 1 (
     echo 已成功执行：Commit（未执行 Push）
     echo 提示：下次运行时添加 -p 或 --push 参数可同时执行推送
 )
-pause
+
+:: 等待用户按键后重新开始
+echo.
+echo 按任意键开始新的提交...
+pause >nul
+cls
+goto start_commit
