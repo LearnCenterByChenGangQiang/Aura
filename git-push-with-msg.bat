@@ -25,10 +25,17 @@ if %perform_push% equ 1 (
 )
 
 :start_commit
-:: 输入 commit message
+:: 输入 commit message，增加空检查
 echo.
-set /p msg=请输入 commit message（留空则使用默认）: 
-if "%msg%"=="" set "msg=auto-commit %date:~0,4%-%date:~5,2%-%date:~8,2% %time:~0,2%:%time:~3,2%:%time:~6,2%"
+set "msg="
+set /p msg=请输入 commit message（不能为空）: 
+
+:: 检查输入是否为空
+if "!msg!"=="" (
+    echo [错误] commit message 不能为空，请重新输入！
+    goto start_commit
+)
+
 echo [信息] 使用的Commit信息：%msg%
 
 echo.
