@@ -9,6 +9,7 @@
 #include "AuraGamplayTags.h"
 
 #include "AuraDebugHelper.h"
+#include "AbilitySystem/AuraAbilitySystemLibrary.h"
 #include "Interaction/CombatInterface.h"
 #include "Kismet/GameplayStatics.h"
 #include "Player/AuraPlayerController.h"
@@ -133,7 +134,10 @@ void UAuraAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallba
 				Props.TargetASC->TryActivateAbilitiesByTag(TagContainer);
 			}
 			// Show damage number
-			ShowFloatingText(Props, LocalIncomingDamage);
+			const bool bBlock = UAuraAbilitySystemLibrary::IsBlockedHit(Props.EffectContextHandle);
+			const bool bCritical = UAuraAbilitySystemLibrary::IsCriticalHit(Props.EffectContextHandle);
+			//ShowFloatingText(Props, LocalIncomingDamage, bBlock, b
+			ShowFloatingText(Props, LocalIncomingDamage, bBlock, bCritical);
 
 		}
 	}
@@ -142,7 +146,7 @@ void UAuraAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallba
 }
 
 
-void UAuraAttributeSet::ShowFloatingText(const FEffectProperties& Props, float Damage) const
+void UAuraAttributeSet::ShowFloatingText(const FEffectProperties& Props, float Damage, bool bBlockedHit, bool bCriticalHi) const
 {
 	if (Props.SourceCharacter != Props.TargetCharacter)
 	{
