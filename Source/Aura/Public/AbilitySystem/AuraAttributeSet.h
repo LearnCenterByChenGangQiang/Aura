@@ -133,6 +133,24 @@ public:
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_MaxMana, Category = "Vital Attributes")
 	FGameplayAttributeData MaxMana; // 最大法力值(关联基础属性:智力)
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, MaxMana)
+	/*
+	 * Resistance Attributes
+	 */
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_FireResistance, Category = "Resistance Attributes")
+	FGameplayAttributeData FireResistance; // 火抗性
+	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, FireResistance)
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_LightningResistance, Category = "Resistance Attributes")
+	FGameplayAttributeData LightningResistance; // 雷抗性
+	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, LightningResistance)
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_ArcaneResistance, Category = "Resistance Attributes")
+	FGameplayAttributeData ArcaneResistance; // 奥术抗性
+	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, ArcaneResistance)
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_PhysicalResistance, Category = "Resistance Attributes")
+	FGameplayAttributeData PhysicalResistance; // 物理抗性
+	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, PhysicalResistance)
 	
 	/*
 	 * Vital Attributes
@@ -200,6 +218,20 @@ public:
 
 	UFUNCTION()
 	void OnRep_MaxMana(const FGameplayAttributeData& OldMaxMana) const;
+
+	UFUNCTION()
+	void OnRep_FireResistance(const FGameplayAttributeData& OldFireResistance) const;
+
+	UFUNCTION()
+	void OnRep_LightningResistance(const FGameplayAttributeData& OldLightningResistance) const;
+
+	UFUNCTION()
+	void OnRep_ArcaneResistance(const FGameplayAttributeData& OldArcaneResistance) const;
+
+	UFUNCTION()
+	void OnRep_PhysicalResistance(const FGameplayAttributeData& OldPhysicalResistance) const;
+
+	
 
 private:
 	void SetEffectProperties(const FGameplayEffectModCallbackData& Data, FEffectProperties& Props) const;
